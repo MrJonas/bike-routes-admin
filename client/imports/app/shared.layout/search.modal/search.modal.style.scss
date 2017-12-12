@@ -1,0 +1,58 @@
+
+.modal-dialog {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: white;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  background: rgba(33,34,34,.96);
+}
+
+.search-modal-input{
+	width: 100%;
+	background: transparent;
+    border: 0;
+    color: white;
+}
+
+input[type=text] {
+  height:40px;
+  font-size:40px;
+  border: 0;
+  margin-left:1px;
+  box-shadow: -7px 10px 0px -7px #ebebeb, 0px 0px 0px -7px #ebebeb;
+  -webkit-transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s;
+}
+input[type=text]:focus {
+  outline: none;
+  box-shadow: -7px 10px 0px -7px #4EA6EA, 0px 0px 0px -7px #4EA6EA;
+}
+
+.fa-lg {
+    font-size: 2.33333333em;
+}
+
+a {
+	color: #888;
+}
+
+a:hover {
+	color: #fff;
+}
+
+.result-list {
+	list-style-type: none; 
+	margin-top: 15px;
+}
+
+li {
+	margin-bottom: 10px;
+}

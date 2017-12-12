@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <form class="form-signin">
+        <input type="text" class="form-control" name="username" placeholder="El. paštas" [(ngModel)]="credentials.email" autofocus="" />
+        <input type="password" class="form-control" name="password" placeholder="Slaptažodis" [(ngModel)]="credentials.password"/>
+        <button *ngIf="!isPasswordRecovery && !isSignup" class="btn btn-lg btn-primary btn-block" (click)="login()">
+            Prisijungimas
+        </button>
+        <button *ngIf="!isPasswordRecovery && isSignup" class="btn btn-lg btn-primary btn-block" (click)="signup()">
+            Registruotis
+        </button>
+        <a [hidden]="isSignup" class="signup-button" (click)="isSignup=true; isPasswordRecovery=false; resetErrors();">Registracija</a>
+        <ul [hidden]="!errors || errors.length == 0">
+            <li *ngFor="let error of errors">
+                {{ error }}
+            </li>
+        </ul>
+        {{ message }}
+    </form>
+</div>

@@ -1,0 +1,87 @@
+<dm-delete-route-modal #deleteModal (delete)="deleteRoute()"></dm-delete-route-modal>
+<dm-publish-route-modal #publishModal (publish)="publishRoute()"></dm-publish-route-modal>
+<dm-unpublish-route-modal #unpublishModal (unpublish)="unPublishRoute()"></dm-unpublish-route-modal>
+
+<div class="main-content">
+<div class="container-fluid">
+			<div class="card" *ngIf="route && addForm && addForm.value" style="width: 100%">
+
+				<div class="card-header">
+					<strong>{{addForm?.value?.title}}</strong>
+					<button 
+					type="button" 
+					class="btn btn-danger btn-sm float-right" 
+					(click)="deleteModal.showModal()" *ngIf="!route.published">Ištrinti</button>
+					<button 
+					type="button" 
+					class="btn btn-primary btn-sm float-right" 
+					(click)="publishModal.showModal()" style="margin-right: 15px;" *ngIf="!route.published" >Paskelbti</button>
+					<button 
+					type="button" 
+					class="btn btn-primary btn-sm float-right" 
+					(click)="unpublishModal.showModal()" style="margin-right: 15px;" *ngIf="route.published" >Atšaukti</button>
+					<button 
+					type="button" 
+					class="btn btn-primary btn-sm float-right" 
+					style="margin-right: 15px;" (click)="saveRoute()" [disabled]="addForm.pristine">Išsaugoti</button>
+				</div>
+
+
+				<div class="card card-block">
+					
+					<form [formGroup]="addForm">
+
+
+						<tabset [justified]="true">
+							<tab heading="Pagrindinės detalės" (select)="setTab(1)">
+								<dm-route-details [group]="addForm" ></dm-route-details>
+							</tab>
+							<tab heading="Aprašymas" (select)="setTab(2)">
+								<div class="card-block">
+									<ckeditor
+									[(ngModel)]="body_editor_content"
+									(change)="onCKEditorChange($event)"
+									[config]="cke_config"
+									debounce="500"
+									[ngModelOptions]="{standalone: true}"
+									>
+								</ckeditor>
+							</div>
+						</tab>
+						<tab heading="Nuotraukos" (select)="setTab(3)">
+							<div class="card-block"  >
+								<dm-route-pictures [group]="addForm" [route]="route"></dm-route-pictures>
+							</div>
+						</tab>
+						<tab heading="Lankytinos vietos" (select)="setTab(4)">
+
+                            <dm-turist-atractions-list
+                                    *ngIf="selectedTab == 4"
+                                    [form]="addForm" ></dm-turist-atractions-list>
+							
+						</tab>
+						<tab heading="Žemėlapis" (select)="setTab(5)" >
+							<div class="card-block">
+								<dm-route-path *ngIf="selectedTab == 5" [group]="addForm"></dm-route-path>
+							</div>
+						</tab>
+						<tab heading="Maršruto idėja" (select)="setTab(6)" >
+							<div class="card-block">
+								<div class="card-block">
+									<ckeditor
+									[(ngModel)]="idea_editor_content"
+									(change)="onCKEditorChange($event)"
+									[config]="cke_config"
+									debounce="500"
+									[ngModelOptions]="{standalone: true}"
+									>
+								</ckeditor>
+							</div>
+						</tab>
+					</tabset>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

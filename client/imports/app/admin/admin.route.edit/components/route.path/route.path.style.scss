@@ -1,0 +1,43 @@
+.sebm-google-map-container {
+    width: 100%;
+    height: 400px;
+}
+
+
+.map-box {
+	background-color: transparent;
+}
+
+.map {
+	height: 80vh; 
+	margin-top: 20px; 
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+@media (max-width: 998px) {
+	.map {
+		height: 70vh;
+		border-radius: 5px;
+	}
+}
+
+.row {
+	width: 100%;
+}
+
+.angular-google-map-container {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.sebm-google-map-container {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.sebm-google-map-container-inner {
+	border-radius: 5px;	
+}

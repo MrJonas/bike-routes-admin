@@ -1,0 +1,70 @@
+<div [formGroup]="atractionForm">
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="name" placeholder="Pavadinimas">
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" formControlName="show_only_in_map">
+                            Rodyti tik žemėlapije?
+                        </label>
+                    </div>
+                </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="btn-group" dropdown>
+                        <button dropdownToggle type="button" class="btn btn-secondary dropdownToggle">
+                        <span *ngIf="atractionForm.value.icon">
+                                <img
+                                        [src]="atractionForm.value.icon | IconUrlPipe"
+                                        alt="{{icon}}">
+
+                               <span>{{atractionForm.value.icon}}</span>
+                        </span>
+                            <span *ngIf="!atractionForm.value.icon">
+                                Pasirinkite
+                        </span>
+                            <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu" style="max-height: 200px; overflow-y: scroll;">
+
+                            <template let-iconGroup ngFor [ngForOf]="ICONS.all">
+
+                                <li class="divider dropdown-divider"></li>
+                                <li class="dropdown-item"><strong>{{iconGroup.name}}</strong></li>
+                                <li class="divider dropdown-divider"></li>
+
+                                <li *ngFor="let icon of iconGroup.icons" role="menuitem" (click)="toogleIcon(icon)">
+                    <span class="dropdown-item">
+                        <img
+                                [src]="icon | IconUrlPipe"
+                                alt="{{icon}}">
+                        {{icon}}
+                        <i *ngIf="icon == atractionForm.value.icon" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                                </li>
+
+                            </template>
+                        </ul>
+                    </div>
+            </div>
+
+            </div>
+        </div>
+
+            <div class="form-group">
+                <textarea class="form-control" id="exampleTextarea" rows="3" formControlName="description" placeholder="Trumpas aprašymas"></textarea>
+            </div>
+
+            <div >
+                Ilguma: <span>{{atractionForm.value.lng}}</span><br>
+                Platuma: <span>{{atractionForm.value.lat}}</span>
+            </div>
+    <hr>
+</div>

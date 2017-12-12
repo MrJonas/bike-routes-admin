@@ -1,0 +1,105 @@
+<div class="main-content">
+<main class="container">
+        <div class="row" style="width:100%" >
+        <section class="col-xs-12 col-md-6 post-list">
+
+        	<div class="card" *ngFor="let route of routes | async">
+                <div class="card-block">
+                
+                <div class="clearfix">
+
+                    <h4 class="card-title">{{route.title}}</h4>
+                    <div>
+                    <p>
+                        <img
+                        *ngIf="route.main_image_id && route.images && route.images.length > 0" 
+                        [src]="route.main_image_id | displayImage"
+                        class="rounded pull-xs-left post--image"
+                        alt="...">
+                        <p class="text-muted detail-info">
+                            <span>{{route.distance}} km</span> / <span>{{route.duration}}</span>
+                            <i *ngIf="route.access_by_train"
+                               popover="Maršrutas pasiekiamas traukiniu"
+                               triggers="mouseenter:mouseleave"
+                               container="body"
+                               class="fa fa-train fa-lg float-right"></i>
+
+                    </p>
+                        
+                        <hr>
+                    	<p class="card-text">{{route.short_description}}</p>
+                    </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-xs-right">
+                    <a href="javascript:;" class="card-link" (click)="openRoute(route.url)">Plačiau</a>
+                    <a href="javascript:;" class="card-link hidden-md-down float-right" (click)="showRouteInMap(route._id)">Rodyti žemėlapyje</a>
+                </div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <aside class="hidden-sm-down">
+            <div class="widget sticky map-box">
+                 <div class="widget sticky map">
+                 	<div class="angular-google-map-container">
+                        <div class="main-map-header text-center">
+                            <span *ngIf="!mapOneRouteMode">Maršrutų žemėlapis</span>
+                            <span *ngIf="mapOneRouteMode">{{mapDetails.title}}</span>
+                        </div>
+				    	<sebm-google-map
+				            [latitude]="centerLat"
+				            [longitude]="centerLng"
+				            [zoom]="zoom">
+				            <sebm-google-map-polyline *ngIf="mapOneRouteMode" [strokeWeight]="5" [strokeColor]="'#3a93b2'">
+					      		<sebm-google-map-polyline-point
+						          *ngFor="let m of path; let i = index"
+						          [latitude]="m.lat"
+						          [longitude]="m.lng"
+						          >
+						          </sebm-google-map-polyline-point>
+					      	</sebm-google-map-polyline>
+					      	<sebm-google-map-marker 
+					      	   *ngFor="let map of mapDetailsList | async | showListPipe: !mapOneRouteMode"
+                               [iconUrl]="map.main_icon | IconUrlPipe"
+					      		[latitude]="map.center_lat" [longitude]="map.center_lng" [title]="map.title" openInfoWindow="true">
+					      		<sebm-google-map-info-window [disableAutoPan]="true">
+						         <strong><a href="javascript:;" (click)="openRoute(map.url)">{{map.title}}</a></strong> 
+                                 <p><span>{{map.distance}} km</span> / <span>{{map.duration}}</span></p>
+                                 <a href="javascript:;" (click)="showRouteInMap(map._id)" style="font-size: 10px">Rodyti žemėlapyje</a>
+						       </sebm-google-map-info-window>
+     						</sebm-google-map-marker>
+
+     						<sebm-google-map-marker 
+					      	   *ngFor="let atraction of mapDetails | AtractionsPipe: mapOneRouteMode"
+					      		[latitude]="atraction.lat" 
+					      		[longitude]="atraction.lng" 
+					      		[iconUrl]="atraction.icon | IconUrlPipe"
+					      		openInfoWindow="true">
+					      		<sebm-google-map-info-window *ngIf="atraction.name || atraction.description" [disableAutoPan]="true">
+						         <div>
+		                            <strong (click)="openRoute(route.url)">{{atraction.name}}</strong><br>
+		                            <label>{{atraction.description}}</label>
+		                        </div>
+						       </sebm-google-map-info-window>
+     						</sebm-google-map-marker>
+				        </sebm-google-map>
+                        <div class="main-map-footer">
+                            <span *ngIf="mapOneRouteMode && mapDetails?.distance" class="pull-left"> {{mapDetails.distance}} km</span>
+                            <span *ngIf="mapOneRouteMode" class="pull-right" style="cursor: pointer" (click)="initMap()">Rodyti visus</span>
+                        </div>
+			        </div>
+                 	
+                 </div>
+
+
+            
+            </div>
+            </div>
+        </aside>
+        </div>
+</main>
+</div>

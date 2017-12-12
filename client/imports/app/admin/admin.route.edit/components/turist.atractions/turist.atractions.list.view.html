@@ -1,0 +1,89 @@
+<br>
+<div class="row">
+    <div class="col-md-6" [formGroup]="form">
+        <div style="height: 80vh; max-height: 80vh; overflow-y: scroll;" formArrayName="atractions" >
+            <div *ngFor="let atraction of form?.controls?.atractions?.controls; let i=index">
+                <div>
+                    <strong>#{{ i + 1 }}</strong>
+                    <strong>{{atraction?.value?.name}}</strong>
+                    <button class="btn btn-danger btn-sm  pull-right"
+                            style="margin-left: 10px"
+                            (click)="removeAtraction(i)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm pull-right"
+                            *ngIf="i != 0"
+                            (click)="pushUp(i)">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm pull-right"
+                            *ngIf="i + 1 != form?.value?.atractions?.length"
+                            (click)="pushDown(i)">
+                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm pull-right"
+                            style="margin-right: 10px"
+                            (click)="initCoordinatesSelection(i)"
+                            popover="Rinktis koordinatę"
+                            triggers="mouseenter:mouseleave"
+                            container="body"
+                            >
+                        <i class="fa fa-globe" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <hr>
+                <dm-turist-atraction [atractionForm]="atraction"></dm-turist-atraction>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="coordSelectingAtractionIndex != null">
+            {{coordSelectingAtractionName}} <br>
+            Rinktis koordinatę spauskite ant žemėlapio:
+
+            <button class="btn btn-danger btn-sm  pull-right"
+                    (click)="cancelCoordinatesSelection()">
+                Atšaukti
+            </button>
+        </div>
+        <div class="angular-google-map-container">
+            <sebm-google-map
+                    [latitude]="this.form.value.lat || centerLat"
+                    [longitude]="this.form.value.lng || centerLng"
+                    [zoom]="zoom"
+                    (mapClick)="mapClicked($event)">
+
+                <sebm-google-map-polyline [strokeWeight]="5" [strokeColor]="'#3a93b2'">
+                    <sebm-google-map-polyline-point
+                            *ngFor="let m of path; let i = index"
+                            [latitude]="m.lat"
+                            [longitude]="m.lng"
+                    >
+                    </sebm-google-map-polyline-point>
+                </sebm-google-map-polyline>
+
+                <sebm-google-map-marker
+                        *ngFor="let atraction of form.value.atractions"
+                        [latitude]="atraction.lat"
+                        [longitude]="atraction.lng"
+                        [iconUrl]="atraction.icon | IconUrlPipe"
+                        openInfoWindow="true">
+                    <sebm-google-map-info-window [disableAutoPan]="true" *ngIf="atraction.name || atraction.description" >
+                        <div>
+                            <strong>{{atraction.name}}</strong><br>
+                            <label>{{atraction.description}}</label>
+                        </div>
+                    </sebm-google-map-info-window>
+                </sebm-google-map-marker>
+            </sebm-google-map>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-primary btn-sm pull-left" (click)="addNewAtraction(i)">
+            Pridėti naują
+        </button>
+    </div>
+</div>

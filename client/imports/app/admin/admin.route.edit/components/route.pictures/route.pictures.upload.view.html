@@ -1,0 +1,8 @@
+<div class="parties-update-container">
+  <div fileDrop
+  		[ngClass]="{'file-is-over': fileIsOver, 'file-uploading': uploading}"
+       (fileOver)="fileOver($event)"
+       (onFileDrop)="onFileDrop($event)">
+    <div>Naujas nuotraukas mesk čia. (Max 300 kb, Formatas: JPG/JPEG)</div>
+  </div>
+</div>

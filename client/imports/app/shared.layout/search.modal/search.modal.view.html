@@ -1,0 +1,25 @@
+
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      <div>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+          <i class="fa fa-times fa-inverse fa-lg" aria-hidden="true"></i>
+        </button>
+        <input autofocus [autoFocusDirective]="myFocusTriggeringEventEmitter" type="text" #searchInput class="search-modal-input" placeholder="Ieškoti maršruto" [(ngModel)]="searchValue" (input)="updateList()">
+        </div>
+
+        <ul class="result-list">
+          <li *ngFor="let route of routes | async | FilterSearcPipe: searchValue" >
+            <a *ngIf="route.url" href="javascript:void(0)" (click)="openRoute(route.url)">
+              <h3>{{route.title}} ({{route.distance}} km / {{route.duration}})</h3>
+              <div [innerHTML]="route.display_text"></div>
+            </a>
+            <p *ngIf="route.no_routes">{{route.no_routes}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

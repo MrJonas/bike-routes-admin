@@ -1,0 +1,66 @@
+<main class="container main-content">
+
+    <div id="route-card" class="card" *ngIf="route">
+      <div class="card-block">
+        <h1 class="card-title">{{route.title}}</h1>
+        <h6 class="card-subtitle mb-2 text-muted">
+        {{route.distance}} km / {{route.duration}}
+        <span *ngIf="route.access_by_train"> / Maršrutas pasiekiamas traukiniu</span>
+        </h6>
+
+        <hr>
+
+        <div [innerHTML]="route.body"></div>
+
+        <h5 class="title-text" *ngIf="route.atractions.length > 0">Lankytinos vietos</h5>
+
+        <ul *ngIf="route.atractions.length > 0">
+            <template ngFor let-atraction [ngForOf]="route.atractions">
+                <li *ngIf="(atraction.name || atraction.description) && !atraction.show_only_in_map">
+                    <strong *ngIf="atraction.name">{{atraction.name}}.</strong>
+                    {{atraction.description}}
+                </li>
+            </template>
+        </ul>
+
+        <h5 class="title-text">Žemėlapis</h5>
+
+        <div *ngIf="_showMap" class="angular-google-map-container">
+	    	<sebm-google-map
+	            [latitude]="centerLat"
+	            [longitude]="centerLng"
+	            [zoom]="zoom">
+	            <sebm-google-map-polyline [strokeWeight]="5" [strokeColor]="'#3a93b2'">
+		      		<sebm-google-map-polyline-point
+                        *ngFor="let m of path; let i = index"
+                        [latitude]="m.lat"
+                        [longitude]="m.lng">
+                    </sebm-google-map-polyline-point>
+				</sebm-google-map-polyline>
+
+                <sebm-google-map-marker 
+                               *ngFor="let atraction of route.atractions"
+                                [latitude]="atraction.lat" 
+                                [longitude]="atraction.lng" 
+                                [iconUrl]="atraction.icon | IconUrlPipe"
+                                openInfoWindow="true">
+                    <sebm-google-map-info-window [disableAutoPan]="true" *ngIf="atraction.name || atraction.description" >
+                         <div>
+                            <strong>{{atraction.name}}</strong><br>
+                            <label>{{atraction.description}}</label>
+                        </div>
+                    </sebm-google-map-info-window>
+                </sebm-google-map-marker>
+	        </sebm-google-map>
+        </div>
+
+        <hr>
+
+        <div class="text-center">
+        <p *ngIf="route.idea_credit_to">Maršruto idėja: <span class="route-idea-box" [innerHTML]="route.idea_credit_to"></span></p>
+        <p *ngIf="route.travel_date">Maršrutas išbandytas: {{route.travel_date}}</p>
+        </div>
+      </div>
+    </div>
+
+</main>

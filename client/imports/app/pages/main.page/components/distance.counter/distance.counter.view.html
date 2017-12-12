@@ -1,0 +1,7 @@
+ <div class="card card--post" *ngIf="distance" style="overflow: hidden;">
+    <p class="text-center">
+        <i class="fa fa-road fa-2x" aria-hidden="true"></i><br>
+                Išbandę visus maršrutus numinsite kilometrų:<br>
+        <span class="counter--text">{{distance}}</span>
+    <p id="colapser" class="text-center transformable" [ngClass]="{'small':isSmall, 'big':!isSmall}">{{text[currentTextID]}}<span class="blinking-cursor">|</span></p>
+</div>

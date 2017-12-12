@@ -1,0 +1,51 @@
+.card {
+	border-radius: 10px;
+	font-size: 24px;
+	text-align: justify;
+}
+
+.card-block {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.authors-photo {
+	max-width: 50%;
+	float: left;
+	margin-right: 40px;
+}
+
+@media (max-width: 768px) {
+	.authors-photo {
+		max-width: 100%;
+		float: left;
+		margin: 25px 0px;
+	}
+	.card {
+		font-size: 18px;
+	}
+	.card-block {
+		padding-right: 1.25rem;;
+	}
+}
+
+@media (min-width: 1024px) {
+	.authors-photo {
+		max-width: 45%;
+		float: left;
+		margin-right: 40px;
+	}
+}
+
+
+.main-content {
+	min-height: auto;
+}
+
+.text-danger {
+	font-size: 12px;
+}
+
+.col-lg-8 {
+	padding: 0;
+}

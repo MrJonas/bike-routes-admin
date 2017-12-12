@@ -1,0 +1,15 @@
+<div class="card card--post" *ngIf="route">
+
+    <p class="text-center" >
+        <i class="fa fa-bicycle fa-2x" aria-hidden="true"></i>
+        <br>
+        Naujausias mūsų maršrutas: <br>
+        <a href="javascript:;" (click)="openRoute(route.url)">{{route.title}}</a> <br>
+        <span> Jo ilgis {{route.distance}} km, o trukmė {{route.duration}}<span> <br>
+    </p>
+
+    <p class="text-center" >
+        <button class="btn btn-danger" type="button" (click)="OpenRouteList()">Kiti maršrutai</button>
+    </p>
+
+</div>

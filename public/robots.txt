@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /scroll/
+Disallow: /maki/
+
+Sitemap: http://dviraciumarsrutai.lt/sitemap.xml

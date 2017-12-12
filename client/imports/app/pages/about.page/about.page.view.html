@@ -1,0 +1,97 @@
+<main class="container main-content">
+    
+        <div class="card">
+            <div class="card-block">
+                <div class="row">
+
+                    <!--<div class="col-lg-5">-->
+                        <!--<img-->
+                            <!--src="img/autoriai.jpg"-->
+                            <!--class="rounded img-thumbnail authors-photo"-->
+                            <!--alt="...">-->
+                    <!--</div>-->
+                    <div class="col-xs-12">
+
+                        <p>
+                            <img
+                                    src="img/autoriai.jpg"
+                                    class="rounded img-thumbnail authors-photo"
+                                    alt="...">
+
+                      <h3>  Sveiki! </h3>
+
+
+                     <p>Mes esame Ieva ir Jonas.
+                        Gražiu oru mėgstame dviračiais važinėtis po Lietuvą.
+                     </p>
+
+                     <p>Šiame bloge rasite visus mūsų išbandytus maršrutus.</p>
+
+
+                     <p>
+                        Mes esame ne dviračių sporto, o labiau poilsio dviračiais entuziastai.
+                        Todėl siūlomi maršrutai yra skirti pradedantiesiems arba vidutiniokams.
+                        Tačiau idėjų savo žygiams pasisems ir labiau patyrę.
+                     </p>
+
+                     <p>Linkime smagių kelionių!</p>
+
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-lg-8" >
+
+                <div [hidden]="messageSend" [formGroup]="contactForm">
+
+                    <h3>Parašykite mums</h3>
+
+                    <div class="form-group">
+                        <input type="email" name="email" email
+                        (input)="submited = false;"
+                        class="form-control" formControlName="email" placeholder="Jūsų el. paštas"/>
+                        <span *ngIf="submited && !contactForm?.controls['email'].valid" class="text-danger">Netinkamas el. pašto formatas!</span>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="6" formControlName="message" placeholder="Jūsų žinutė" 
+                        (input)="submited = false;"></textarea>
+                        <span *ngIf="submited && !contactForm?.controls['message'].valid" class="text-danger">Įvesta žinutė per trumpa!</span>
+                    </div>
+
+                    <re-captcha #captchaRef
+                                site_key="6Lc0PyAUAAAAAM3IJKzrQJZ29Gs4aVT2QsQueon8"
+                                (captchaResponse)="recapchaResolve($event)"
+                                (captchaExpired)="resetRecapcha()"
+                                [size]="recaptchaSize"
+                                [language]="'lt'"
+                    ></re-captcha>
+
+                    <span *ngIf="submited && !recapcha" class="text-danger">Pažymėkite recapcha!</span>
+
+                    <br>
+
+                    <button class="btn btn-secondary" (click)="contact()" >
+                        <i class="fa fa-spinner fa-pulse" *ngIf="loading"></i> 
+                        Siųsti
+                    </button>
+
+                </div>
+
+                <div *ngIf="messageSend" class="text-center">
+
+                    <h4>Ačiū Jūsų žinutė jau pakeliui! <i class="fa fa-rocket" aria-hidden="true"></i></h4>
+
+                </div>
+                </div>
+
+                    </div>
+
+            </div>
+
+            </div>
+        </div>
+
+</main>

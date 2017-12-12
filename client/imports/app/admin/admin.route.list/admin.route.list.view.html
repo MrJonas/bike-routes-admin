@@ -1,0 +1,45 @@
+<dm-create-new-route #createNewModal (create)="insertNewRoute($event)"></dm-create-new-route>
+<main class="main-content">
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<button 
+			type="button" 
+			class="btn btn-secondary pull-rigth" 
+			(click)="showCreateNewModal()">
+			Naujas maršrutas</button>
+
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+			<table class="table table-bordered table-hover" style="background-color: white;">
+			  <thead>
+			    <tr>
+			      <th>#</th>
+			      <th>Pavadinimas</th>
+			      <th>Atstumas</th>
+			      <th>Trukmė</th>
+			      <th>Data</th>
+			      <th>Rikiavimo data</th>
+			      <th>Statusas</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let route of routes | async; let i = index;" >
+			      <th>{{i + 1}}</th>
+			      <td><a [routerLink]="['/admin/edit/', route._id]">{{route.title}}</a></td>
+			      <td>{{route.distance}}</td>
+			      <td>{{route.duration}}</td>
+			      <td>{{route.travel_date}}</td>
+			      <td>{{route.sorting_date | date:'yyyy/MM/dd'}}</td>
+			      <td>
+			      	<span *ngIf="route.published">Paskelbtas</span>
+					<span *ngIf="!route.published">Nepaskelbtas</span>
+					</td>
+			    </tr>
+			  </tbody>
+			</table>
+	</div>
+	</div>
+</main>

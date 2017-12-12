@@ -1,0 +1,29 @@
+<div class="card-block" [formGroup]="form">
+	<dm-route-pictures-upload #upload (onFile)="onImage($event)"></dm-route-pictures-upload>
+
+ 	<div class="card-group" formArrayName="images">
+
+		<div class="card" *ngFor="let image of route.images ; let i = index;" style="max-width: 300px;">
+			<img 
+				*ngIf="route.images && route.images.length > 0" 
+				style="width: 300px; height: auto" [src]="image.id | displayImage">
+			<div class="card-block"  [formGroupName]="i">
+				<strong>#{{ i + 1 }}</strong>
+				<button class="btn btn-danger btn-sm pull-right"(click)="removeImage(i)">
+		        	<i class="fa fa-trash" aria-hidden="true"></i>
+		        </button>
+		        <div class="form-check">	
+					<label class="form-check-label">
+					  <input type="checkbox" class="form-check-input" formControlName="main" 
+					  (change)="toogleMainPhoto($event, image.id)"
+					  [attr.disabled]="(selectedMainPhotoId != null && selectedMainPhotoId != image.id) ? true : null">
+					  	Pagrindinė nuotrauka?
+						</label>
+
+					<button class="btn btn-default" type="button" (click)="sendImageUrlToClipBoard(image.id)">Kopijuoti url</button>
+				</div>
+
+		  </div>
+      	</div>
+	</div>	
+</div>

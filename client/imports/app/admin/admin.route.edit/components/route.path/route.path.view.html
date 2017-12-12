@@ -1,0 +1,58 @@
+<div class="row" style="width:100%" [formGroup]="form">
+        <section class="col-xs-12 col-md-7">
+
+        	<div class="form-group">
+				<label >Zoom:</label>
+				<select type="text" class="form-control" formControlName="map_zoom"  [(ngModel)]="zoom">
+					<option value=""></option>
+					<option *ngFor="let zoom of zooms" [ngValue]="zoom">{{zoom}}</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label >Centro koordinatės platuma:</label>
+				<input type="number" class="form-control" formControlName="map_center_lat"  [(ngModel)]="centerLat"/>
+			</div>
+
+			<div class="form-group">
+				<label >Centro koordinatės ilguma:</label>
+				<input type="number" class="form-control" formControlName="map_center_lng"  [(ngModel)]="centerLng"/>
+			</div>
+
+
+	    	<div class="form-group">
+				<label for="exampleTextarea">Kelio koordinatės</label>
+				<textarea class="form-control"  rows="5" formControlName="coordinates" (change)="setPath()"></textarea>
+			</div>
+
+			<button class="btn btn-primary"  (click)="saveMap()">save map</button>
+
+        </section>
+
+        <aside style="width: 400px;">
+            <div class="widget sticky map-box">
+                 <div class="widget sticky map">
+                 	<div class="angular-google-map-container">
+                 		<sebm-google-map
+					        [latitude]="centerLat"
+					        [longitude]="centerLng"
+					        [zoom]="zoom"
+					        (centerChange)="centerChange($event)">
+					        <sebm-google-map-polyline [strokeWeight]="5" [strokeColor]="'#3a93b2'">
+					      		<sebm-google-map-polyline-point
+						          *ngFor="let m of path; let i = index"
+						          [latitude]="m.lat"
+						          [longitude]="m.lng"
+						          >
+						          </sebm-google-map-polyline-point>
+					      	</sebm-google-map-polyline>
+				    	</sebm-google-map>
+
+			        </div>
+                 	
+                 </div>
+            
+            </div>
+            </div>
+        </aside>
+</div>
