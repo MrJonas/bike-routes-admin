@@ -13,7 +13,7 @@ RUN npm install
 WORKDIR /opt/sociallyapp/app
 ENV PORT 80
 ENV ROOT_URL http://127.0.0.1
-#ENV MONGO_URL mongodb://mongo_instance:27017/sociallyapp
+ENV MONGO_URL mongodb://mongo_instance:27017/sociallyapp
 #ENV MONGO_URL 127.0.0.1:27017/sociallyapp
 
 # Expose port 80

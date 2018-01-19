@@ -5,8 +5,8 @@ TARGET_DIRECTORY:="/root"
 SERVER_IP:="212.24.104.202"
 IMAGE_NAME:="sociallyapp"
 CONTAINER_NAME:="sociallyapp"
-TARBALL_NAME:="bundle.tar.gz."
-URL:="8962b.k.dedikuoti.lt"
+TARBALL_NAME:="bundle.tar.gz"
+URL:="9a4dc.k.dedikuoti.lt"
 PORT:="3000"
 
 PHONY: build
@@ -31,13 +31,20 @@ deploy:
 	@echo "Uploading and running app in a docker container"
 	@echo "-------------------------------------------------------"
 	@ssh root@$(SERVER_IP) \
-		"cat > $(TARGET_DIRECTORY)/$(TARBALL_NAME) ; \
+		" echo step1 ; \
+		echo step2 ; \
 		cd $(TARGET_DIRECTORY) ; \
+		echo step3 ; \
 		tar -xzf ./$(TARBALL_NAME) ; \
+		echo step4 ; \
 		cd ./bundle ; \
+		echo step5 ;\
 		docker stop $(CONTAINER_NAME) ; \
 		docker rm $(CONTAINER_NAME) ; \
 		docker build --tag $(IMAGE_NAME) . ; \
-		docker run -p $(PORT):80 --name $(CONTAINER_NAME) --link mongo_instance:mongo_instance -d $(IMAGE_NAME) ; \
+		docker run -e "VIRTUAL_HOST=admin.dviraciumarsrutai.lt" \
+			-e "LETSENCRYPT_HOST=admin.dviraciumarsrutai.lt"  \
+			-e "LETSENCRYPT_EMAIL=jonas.l.antanaitis@gmail.com"  \
+			 --name $(CONTAINER_NAME) --link mongo_instance:mongo_instance -d $(IMAGE_NAME) ; \
 		" \
 	< ./deploy/$(TARBALL_NAME)
