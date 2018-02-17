@@ -22,8 +22,13 @@ Meteor.startup(() => {
   	}
 
 	Accounts.config({
-		forbidClientAccountCreation: true
+		forbidClientAccountCreation: true,
 	});
+    //
+	// Accounts.onCreateUser((options, user) => {
+    //
+	// 	return user;
+	// });
 
 	WebApp.addHtmlAttributeHook(() => ({ lang: 'lt-LT' }));
 

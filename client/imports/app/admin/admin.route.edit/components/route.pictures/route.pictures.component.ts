@@ -82,14 +82,9 @@ export class RoutePicturesComponent {
   }
 
   getImageUrl(id) {
-  	let imageUrl: string;
-
     const found = Images.findOne(id);
-
     if (found) {
-        const path = `ufs/${found.store}/${found._id}/${found.name}`;
-        imageUrl = Meteor.absoluteUrl(path);
-        return imageUrl;
+        return `https://dviraciumarsrutai.lt/api/images/${found._id}`;
     }
     return null;
   }  

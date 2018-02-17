@@ -3,6 +3,7 @@ import {Email} from 'meteor/email';
 import {check} from 'meteor/check';
 import {Meteor} from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
+import { Accounts } from 'meteor/accounts-base';
 
 Meteor.methods({
   contactAutors: function (contact, recapcha) {

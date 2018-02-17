@@ -16,8 +16,8 @@ export class DisplayImagePipe implements PipeTransform {
     const found = Images.findOne(id)
 
     if (found) {
-        const path = `ufs/${found.store}/${found._id}/${found.name}`;
-        imageUrl = Meteor.absoluteUrl(path);
+        //const path = `ufs/${found.store}/${found._id}/${found.name}`;
+        imageUrl = `https://dviraciumarsrutai.lt/api/images/${found._id}`;
     }
 
     return imageUrl;

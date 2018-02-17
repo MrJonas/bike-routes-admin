@@ -30,6 +30,7 @@ deploy:
 	@echo "-------------------------------------------------------"
 	@echo "Uploading and running app in a docker container"
 	@echo "-------------------------------------------------------"
+	@scp ./deploy/$(TARBALL_NAME) root@$(SERVER_IP):/root
 	@ssh root@$(SERVER_IP) \
 		" echo step1 ; \
 		echo step2 ; \

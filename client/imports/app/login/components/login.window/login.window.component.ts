@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Accounts } from 'meteor/accounts-base';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
+import { MeteorObservable } from 'meteor-rxjs';
 
 declare var Package;
 declare var _;
@@ -118,6 +119,16 @@ export class LoginWindowComponent {
 
     signup(): void {
         this.resetErrors();
+
+        // MeteorObservable.call('createUser', this.credentials, (error)=>{
+        //         if (error) {
+        //             this.errors.push(error.reason || "Unknown error");
+        //         }
+        //         else {
+        //             this.isDropdownOpen = false;
+        //             this._resetCredentialsFields();
+        //         }
+        // }).subscribe(()=>{}, ()=>{});
 
         Accounts.createUser(this.credentials, (error) => {
             if (error) {
