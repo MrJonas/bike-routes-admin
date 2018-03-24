@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { BsDropdownModule, ModalModule as ValorModalModule } from 'ng2-bootstrap';
+//import { BsDropdownModule} from 'ngx-bootstrap';
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { TabsModule } from 'ng2-bootstrap';

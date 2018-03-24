@@ -16,34 +16,13 @@ import { LoginWindowComponent } from "./login/components/login.window/login.wind
 import {AuthGuard} from "./login/annotations";
 
 export const routes: Route[] = [
-  { path: '', component: MainPageComponent,
-    data: {
-      meta: {
-        title: 'Pagrindinis puslapis | Dviračių maršrutai Lietuvoje',
-        description: 'Maršrutų žemėlapis, lankytinos vietos, įspūdžiai bei patarimai - viską rasite bloge apie turistinius žygius dviračiais.'
-      }
-    }},
+  { path: '', component: LoginWindowComponent},
   // { path: 'party/:partyId', component: PartyDetailsComponent, canActivate: ['canActivateForLoggedIn'] },
   { path: 'admin/edit/:id', component: AdminRoutesEdit, canActivate: [AuthGuard] },
   { path: 'admin/edit', component: AdminRoutesEdit, canActivate: [AuthGuard]  },
   { path: 'admin/list', component: AdminRoutesList, canActivate: [AuthGuard]  },
   { path: 'admin/login', component: LoginWindowComponent  },
-  { path: 'apie', component: AboutPageComponent,
-    data: {
-      meta: {
-        title: 'Apie blogą | Dviračių maršrutai Lietuvoje',
-        description: 'Blogo autoriai ir kontaktai.'
-      }
-    }},
-  { path: 'marsrutai', component: RouteListPageComponent,
-    data: {
-      meta: {
-        title: 'Maršrutų žemėlapis | Dviračių maršrutai Lietuvoje',
-        description: 'Dviračių maršrutų bei lankytinų vietų žemėlapis'
-      }
-    }},
-  { path: 'marsrutas/:id', component: RoutePageComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'admin/login' }
 ];
 
 export const ROUTES_PROVIDERS = [{

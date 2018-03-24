@@ -20,8 +20,6 @@ export class HeaderComponent {
     isLoggingIn: boolean;
     isLoggedIn: boolean;
 
-  @ViewChild('searchModal') public searchModal;
-
     constructor(private zone: NgZone, private _router: LocationService){
         this._initAutorun();
     }
@@ -42,10 +40,6 @@ export class HeaderComponent {
    	this.isCollapsed = true;
    }
 
-   showSearchModal() {
-     this.disableHeadbar();
-     this.searchModal.showModal();
-   }
     logout(): void {
         Meteor.logout();
         this._router.goToMainPage()

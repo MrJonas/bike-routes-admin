@@ -1,7 +1,5 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+//@import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./imports/app/colors.scss";
-
-
 @import "./theme/loader.main.scss";
 @import "./theme/modal.scss";
 @import "theme/_body";
@@ -11,10 +9,6 @@
     bottom: 0px;
     min-height: 100px; 
     background-color: #3a93b2;
-    //background: linear-gradient(
-    //              rgba(58, 147, 178, 0.8),
-    //              rgba(58, 147, 178, 0.8)
-    //), url('./img/tree_bark.png') repeat;
 }
 
 .footer-text {
@@ -112,13 +106,6 @@ nav {
     z-index: 1;
 }
 
-.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-}
-
-.sticky:before,
-.sticky:after {
-    content: '';
-    display: table;
+ul.dropdown-menu {
+    display: block ;
 }
